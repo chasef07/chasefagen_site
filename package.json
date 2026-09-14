@@ -27,7 +27,7 @@
     "react-dom": "^19.2.8",
     "shadcn": "^4.19.0",
     "tailwind-merge": "^3.6.0",
-    "three": "0.185.1"
+    "three": "0.186.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.6",
