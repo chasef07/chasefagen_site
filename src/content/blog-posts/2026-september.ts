@@ -2,6 +2,29 @@ import { BlogPost } from '../../types/blog'
 
 export const september2026Posts: BlogPost[] = [
   {
+    id: 'doing-the-thing-in-sf',
+    title: 'Doing the Thing in SF',
+    date: '2026-09-19',
+    location: 'San Francisco, California',
+    country: 'United States',
+    slug: 'doing-the-thing-in-sf',
+    year: '2026',
+    excerpt:
+      'A year of commitment, growth, and building with Kyle—and finding the space, routine, and focus to take it to the next level.',
+    content: `I am in SF doing the thing. It is crazy to me that I am in the same rooms as Nike execs and entrepreneurs that have raised hundreds of millions of dollars. Not only am I in the same room, but I am thriving. Sharing my energy and ideas. Being heard and listened to.
+
+Almost a year ago I made a commitment to an AI agent consulting business. I trusted the path fully and the past year of commitment I have grown so much. I have learned so much about myself, business, friendships, family and relationships. I really feel like an adult with mature perspectives and real learnings and experiences I have integrated into my mind body and soul. That is priceless.
+
+Even though I have grown and learned so much I know I still have more to give. That is the proceeds of a man and of life. To continually evolve in mind body and spirit. So how do I do that? It first requires routine and structure to get into a rhythm. Constant moving around does not produce the most effective directed outcomes. I need to take time in my days to reflect and not just work 24/7. The best ideas come from giving yourself the space to think, not the process of thinking itself.
+
+I am confident in the business and the product. A year ago Kyle and I just had a thought to make AiAgents for businesses. Now we have a real one providing real value to a medical practice and business and a product and company and experience to back it. To take it to the next level it requires more from me and more action and effort and deep thought.
+
+I have two more weeks here in the city of SF with Kyle. I look forward to taking in the energy of the city and I know I will be back here. After I look forward to really thinking deeply about life routine structure commitments and focus.
+
+With love. I am proud of the man I am becoming I am Proud of the risks I took to get here I am proud of the confidence I entrusted myself with and I will continue to cultivate all of this to the absolute highest degrees.`,
+    images: [],
+  },
+  {
     id: 'five-days-in-san-francisco',
     title: 'Five Days in San Francisco',
     date: '2026-09-06',
