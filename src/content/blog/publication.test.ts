@@ -8,6 +8,7 @@ import {
   getPost,
   getPostsForArchive,
   postStaticParams,
+  parseBlogDate,
 } from './publication'
 
 describe('Blog publication interface', () => {
@@ -98,5 +99,31 @@ describe('Blog publication interface', () => {
         [{ ...archives[0], year: archives[0].year - 1 }],
       ),
     ).toThrow('Invalid Archive calendar identity')
+  })
+})
+
+describe('Blog calendar dates', () => {
+  test('reads ISO and legacy display dates as the same UTC calendar day', () => {
+    expect(parseBlogDate('2026-07-26').toISOString()).toBe(
+      '2026-07-26T00:00:00.000Z',
+    )
+    expect(parseBlogDate('July 26, 2026').toISOString()).toBe(
+      '2026-07-26T00:00:00.000Z',
+    )
+    expect(parseBlogDate('2024-02-29').toISOString()).toBe(
+      '2024-02-29T00:00:00.000Z',
+    )
+  })
+
+  test('rejects impossible days instead of moving entries into another month', () => {
+    for (const date of [
+      '2026-02-30',
+      'February 29, 2025',
+      'April 31, 2026',
+      '2026-13-01',
+      'not-a-date',
+    ]) {
+      expect(() => parseBlogDate(date)).toThrow('Malformed Blog date')
+    }
   })
 })

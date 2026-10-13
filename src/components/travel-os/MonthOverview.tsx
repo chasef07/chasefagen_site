@@ -59,7 +59,7 @@ export function MonthOverview({
       src: archive.image,
       alt: `${archive.displayDate} cover`,
       label: archive.displayDate,
-      meta: `${posts.length} entries`,
+      meta: `${posts.length} ${posts.length === 1 ? 'entry' : 'entries'}`,
     })
   }
 
@@ -94,7 +94,7 @@ export function MonthOverview({
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Badge>
               <span className="font-mono tabular-nums">{posts.length}</span>
-              entries
+              {posts.length === 1 ? 'entry' : 'entries'}
             </Badge>
             {countries.map((country) => (
               <Badge key={country} variant="outline">
