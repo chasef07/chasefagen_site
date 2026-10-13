@@ -19,10 +19,37 @@ export function calculateReadingTime(content: string): number {
   return Math.max(1, Math.ceil(words / 200))
 }
 
+const calendarMonths = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+]
+
 export function parseBlogDate(date: string): Date {
   const isoDate = /^(\d{4})-(\d{2})-(\d{2})$/.exec(date)
-  const parsed = new Date(isoDate ? `${date}T00:00:00Z` : `${date} UTC`)
-  if (Number.isNaN(parsed.getTime())) {
+  const displayDate = /^([A-Za-z]+) (\d{1,2}), (\d{4})$/.exec(date)
+  const year = Number(isoDate?.[1] ?? displayDate?.[3])
+  const month = isoDate
+    ? Number(isoDate[2]) - 1
+    : calendarMonths.indexOf(displayDate?.[1].toLowerCase() ?? '')
+  const day = Number(isoDate?.[3] ?? displayDate?.[2])
+  const parsed = new Date(0)
+  parsed.setUTCFullYear(year, month, day)
+  if (
+    (!isoDate && !displayDate) ||
+    parsed.getUTCFullYear() !== year ||
+    parsed.getUTCMonth() !== month ||
+    parsed.getUTCDate() !== day
+  ) {
     throw new Error(`Malformed Blog date: ${date}`)
   }
   return parsed
@@ -92,21 +119,6 @@ function deriveMissingArchives(
   })
 }
 
-const calendarMonths = new Set([
-  'january',
-  'february',
-  'march',
-  'april',
-  'may',
-  'june',
-  'july',
-  'august',
-  'september',
-  'october',
-  'november',
-  'december',
-])
-
 function assertUnique<T>(
   records: T[],
   keyOf: (record: T) => string,
@@ -157,7 +169,6 @@ export function createBlogPublication(
   for (const archive of archives) {
     const date = parseBlogDate(archive.date)
     if (
-      !calendarMonths.has(archive.slug) ||
       monthSlug(archive.date) !== archive.slug ||
       date.getUTCFullYear() !== archive.year
     ) {

@@ -1,7 +1,11 @@
 import { describe, expect, test } from 'bun:test'
 
 import { posts } from '@/content/blog/publication'
-import { generatePageMetadata, generatePostMetadata } from '@/lib/seo'
+import {
+  generateArticleJsonLd,
+  generatePageMetadata,
+  generatePostMetadata,
+} from '@/lib/seo'
 
 describe('social metadata', () => {
   test('uses the Chase Fagen Blog brand card', () => {
@@ -40,6 +44,16 @@ describe('social metadata', () => {
       title: 'Chase Fagen Blog',
       type: 'article',
       url: `https://chasefagen.com${post.url}`,
+    })
+  })
+})
+
+describe('article structured dates', () => {
+  test('uses ISO dates for legacy display-date posts', () => {
+    const post = posts.find((post) => post.date === 'July 26, 2026')!
+    expect(generateArticleJsonLd(post)).toMatchObject({
+      datePublished: '2026-07-26T00:00:00.000Z',
+      dateModified: '2026-07-26T00:00:00.000Z',
     })
   })
 })

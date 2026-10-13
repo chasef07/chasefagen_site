@@ -14,17 +14,17 @@ A personal travel journal built with Next.js 16 and React 19. The site combines 
 
 ## Stack
 
-- Next.js 16.2 and React 19.2
+- Next.js 16.4 and React 19.3
 - TypeScript 6
 - Tailwind CSS 4 and shadcn/ui primitives
 - React Three Fiber, Drei, and Three.js
-- Bun 1.3.11
+- Bun 1.4.3
 
 Production builds use Webpack because the globe integration is configured for it.
 
 ## Getting started
 
-Install [Bun](https://bun.sh/) 1.3.11 or a compatible version, then run:
+Install [Bun](https://bun.sh/) 1.4.3 (the packageManager version), then run:
 
 ```bash
 bun install --frozen-lockfile

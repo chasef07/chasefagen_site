@@ -169,8 +169,8 @@ export function generateArticleJsonLd(
         url: `${siteConfig.url}/logo.png`,
       },
     },
-    datePublished: post.date,
-    dateModified: post.date,
+    datePublished: parseBlogDate(post.date).toISOString(),
+    dateModified: parseBlogDate(post.date).toISOString(),
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': `${siteConfig.url}${postPath(

@@ -16,24 +16,6 @@ import {
   restoreDetailFocus,
 } from '@/lib/journal-detail-history'
 
-function ReaderViewport({
-  children,
-  contentRef,
-}: {
-  children: React.ReactNode
-  contentRef: React.RefObject<HTMLDivElement | null>
-}) {
-  return (
-    <div
-      ref={contentRef}
-      data-detail-scroll
-      className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
-    >
-      {children}
-    </div>
-  )
-}
-
 export function JournalReader({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
@@ -121,7 +103,13 @@ export function JournalReader({ children }: { children: React.ReactNode }) {
           <SheetTitle>Journal detail</SheetTitle>
           <SheetDescription>The selected journal resource.</SheetDescription>
         </SheetHeader>
-        <ReaderViewport contentRef={contentRef}>{children}</ReaderViewport>
+        <div
+          ref={contentRef}
+          data-detail-scroll
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain"
+        >
+          {children}
+        </div>
       </SheetContent>
     </Sheet>
   )
