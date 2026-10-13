@@ -229,6 +229,7 @@ type JourneyOnlyStop = JourneyStopDetails & {
     | 'New York, USA'
     | 'Palm Harbor, Florida, USA'
     | 'San Francisco, California, USA'
+    | 'Clearwater, Florida, USA'
   countrySlug?: never
 }
 
@@ -406,6 +407,11 @@ const itinerary: readonly ItineraryStop[] = [
     name: 'San Francisco, California, USA',
     coordinates: [37.7749, -122.4194],
     visitDate: 'September 2026',
+  },
+  {
+    name: 'Clearwater, Florida, USA',
+    coordinates: [27.9659, -82.8001],
+    visitDate: 'October 2026',
   },
 ]
 

@@ -24,6 +24,7 @@ import { june2026Posts } from './blog-posts/2026-june'
 import { july2026Posts } from './blog-posts/2026-july'
 import { august2026Posts } from './blog-posts/2026-august'
 import { september2026Posts } from './blog-posts/2026-september'
+import { october2026Posts } from './blog-posts/2026-october'
 
 export type BlogArchive = {
   year: number
@@ -62,9 +63,20 @@ export const allBlogPosts: BlogPost[] = [
   ...july2026Posts,
   ...august2026Posts,
   ...september2026Posts,
+  ...october2026Posts,
 ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
 export const blogArchives: BlogArchive[] = [
+  {
+    year: 2026,
+    slug: 'october',
+    title: 'October 2026: Back Home in Florida',
+    date: '2026-10-12',
+    displayDate: 'October 2026',
+    excerpt:
+      "Back home in Clearwater, reflecting on freedom, family, almost a year of building with Kyle, and where to invest in my life's work.",
+    image: '/assets/images/misc/posttrip.jpg',
+  },
   {
     year: 2026,
     slug: 'september',

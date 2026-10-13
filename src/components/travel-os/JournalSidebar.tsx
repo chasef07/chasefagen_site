@@ -3,15 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import {
-  Backpack,
-  CalendarDays,
-  ChevronRight,
-  Clapperboard,
-  Folder,
-  FolderOpen,
-  Globe2,
-} from 'lucide-react'
+import { ChevronRight, Folder, FolderOpen } from 'lucide-react'
 
 import {
   Collapsible,
@@ -29,6 +21,7 @@ import {
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarTrigger,
   useSidebar,
 } from '@/components/ui/sidebar'
 import { Separator } from '@/components/ui/separator'
@@ -88,19 +81,19 @@ export function JournalSidebar({
   }, [activeYear, pathname])
 
   return (
-    <Sidebar>
-      <SidebarHeader className="border-b p-4">
-        <NavigationLink
-          href="/"
-          className="rounded-md px-2 py-1 text-sm font-semibold outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
-        >
-          Chase Fagen
-        </NavigationLink>
-        <div className="flex min-w-0 items-center gap-2 px-2 text-xs text-sidebar-foreground/60">
-          <span className="relative flex size-2 shrink-0">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-[var(--ui-current-location)] opacity-60 motion-reduce:animate-none" />
-            <span className="relative inline-flex size-2 rounded-full bg-[var(--ui-current-location)]" />
-          </span>
+    <Sidebar id="journal-navigation">
+      <SidebarHeader className="gap-3 px-4 py-6">
+        <div className="flex items-center justify-between gap-2">
+          <NavigationLink
+            href="/"
+            className="rounded-md px-2 py-1 text-lg font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-sidebar-ring"
+          >
+            Chase Fagen
+          </NavigationLink>
+          <SidebarTrigger className="md:hidden" />
+        </div>
+        <div className="flex min-w-0 items-center gap-2 px-2 text-xs text-muted-foreground">
+          <span className="size-2 shrink-0 rounded-full bg-[var(--ui-current-location)]" />
           <span className="min-w-0 leading-snug">
             Currently in{' '}
             {currentLocation.stopName
@@ -110,46 +103,12 @@ export function JournalSidebar({
         </div>
       </SidebarHeader>
 
-      <SidebarContent className="px-2">
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton asChild isActive={pathname === '/'}>
-              <NavigationLink href="/">
-                <CalendarDays />
-                <span className="flex-1">Today</span>
-              </NavigationLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              isActive={
-                pathname === '/world' || pathname.startsWith('/countries/')
-              }
-            >
-              <NavigationLink href="/world">
-                <Globe2 />
-                <span className="flex-1">World</span>
-              </NavigationLink>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-          {[
-            { href: '/vlogs', label: 'Vlogs', icon: Clapperboard },
-            { href: '/packing-checklist', label: 'Packing', icon: Backpack },
-          ].map(({ href, label, icon: Icon }) => (
-            <SidebarMenuItem key={href}>
-              <SidebarMenuButton asChild isActive={pathname === href}>
-                <NavigationLink href={href}>
-                  <Icon />
-                  <span>{label}</span>
-                </NavigationLink>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-
+      <SidebarContent className="px-3 pb-6">
         <Separator className="my-2" />
 
+        <p className="px-3 py-1 text-xs font-medium text-muted-foreground">
+          Journal
+        </p>
         <SidebarMenu>
           {years.map((year) => {
             const isOpen = openYear === year.year
@@ -171,7 +130,7 @@ export function JournalSidebar({
                     >
                       {isOpen ? <FolderOpen /> : <Folder />}
                       <span className="flex-1 tabular-nums">{year.year}</span>
-                      <span className="font-mono text-[9px] tabular-nums text-sidebar-foreground/35">
+                      <span className="text-xs tabular-nums text-muted-foreground">
                         {year.postCount}
                       </span>
                       <ChevronRight className="transition-transform duration-200 group-data-[state=open]/year:rotate-90" />

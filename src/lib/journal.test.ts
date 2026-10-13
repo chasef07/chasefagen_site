@@ -10,7 +10,7 @@ describe('Journal chronology', () => {
     const years = buildJournalYears(posts, archives)
 
     expect(years.map(({ year }) => year)).toEqual([2026, 2025, 2024])
-    expect(years[0].months[0].key).toBe('2026-09')
+    expect(years[0].months[0].key).toBe('2026-10')
     expect(
       years
         .find(({ year }) => year === 2025)

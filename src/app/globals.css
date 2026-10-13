@@ -38,8 +38,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: var(--font-inter);
-  --font-serif: ui-serif, Georgia, serif;
+  --font-sans: var(--font-manrope);
+  --font-serif: var(--font-source-serif), Georgia, serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -54,50 +54,50 @@
 :root {
   color-scheme: light;
   --radius: 0.625rem;
-  --background: #e8ded3;
-  --foreground: #3a2618;
-  --card: #f1e9e0;
-  --card-foreground: #3a2618;
-  --popover: #f4ede6;
-  --popover-foreground: #3a2618;
-  --primary: #5b3a29;
-  --primary-foreground: #fff9f1;
-  --secondary: #ded0c1;
-  --secondary-foreground: #4a3021;
-  --muted: #e1d5c8;
-  --muted-foreground: #735a48;
-  --accent: #d2c0af;
-  --accent-foreground: #3a2618;
+  --background: #fafbfc;
+  --foreground: #253449;
+  --card: #ffffff;
+  --card-foreground: var(--foreground);
+  --popover: #ffffff;
+  --popover-foreground: var(--foreground);
+  --primary: #365f85;
+  --primary-foreground: #ffffff;
+  --secondary: #e8eef5;
+  --secondary-foreground: #34516e;
+  --muted: #edf1f5;
+  --muted-foreground: #617085;
+  --accent: #e3edf7;
+  --accent-foreground: #294e73;
   --destructive: #b42318;
-  --border: #c8b4a1;
-  --input: #b9a38e;
-  --ring: #7a5138;
-  --chart-1: #7a5138;
-  --chart-2: #a47c5e;
-  --chart-3: #c69c6d;
-  --chart-4: #735a48;
-  --chart-5: #9a665b;
-  --sidebar: #d8c8b8;
-  --sidebar-foreground: #3a2618;
-  --sidebar-primary: #5b3a29;
-  --sidebar-primary-foreground: #fff9f1;
-  --sidebar-accent: #c9b5a3;
-  --sidebar-accent-foreground: #3a2618;
-  --sidebar-border: #bca792;
-  --sidebar-ring: #7a5138;
+  --border: #dce3eb;
+  --input: #c6d1de;
+  --ring: #507a9e;
+  --chart-1: #365f85;
+  --chart-2: #6b91ad;
+  --chart-3: #8aa4bc;
+  --chart-4: #617085;
+  --chart-5: #5e8b89;
+  --sidebar: #f2f4f7;
+  --sidebar-foreground: #41536b;
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: #dfe9f4;
+  --sidebar-accent-foreground: #294e73;
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 
   /* The WebGL globe reads these semantic aliases directly. */
-  --ui-body-bg: #e8ded3;
-  --ui-bg-strong: #ded0c1;
-  --ui-bg-elevated: #f1e9e0;
-  --ui-border-strong: #8a6a50;
-  --ui-text-primary: #3a2618;
-  --ui-text-muted: #735a48;
-  --ui-accent: #7a5138;
-  --ui-current-location: #55735b;
-  --ui-globe-bg: #e8ded3;
-  --ui-globe-sphere: #ded0c1;
-  --ui-globe-line: #927762;
+  --ui-body-bg: var(--background);
+  --ui-bg-strong: var(--secondary);
+  --ui-bg-elevated: var(--card);
+  --ui-border-strong: #8aa4bc;
+  --ui-text-primary: var(--foreground);
+  --ui-text-muted: var(--muted-foreground);
+  --ui-accent: var(--primary);
+  --ui-current-location: #397b80;
+  --ui-globe-bg: var(--background);
+  --ui-globe-sphere: #e4ebf3;
+  --ui-globe-line: #8aa4bc;
 }
 
 @layer base {
@@ -107,6 +107,11 @@
 
   body {
     @apply antialiased bg-background text-foreground;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
   }
   html {
     @apply font-sans;

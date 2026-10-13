@@ -67,7 +67,7 @@ export function MonthOverview({
     <main className="mx-auto flex max-w-7xl flex-col gap-8 px-5 py-8 sm:px-8 sm:py-12">
       <header className="grid gap-8 border-b border-border pb-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(20rem,26rem)] lg:items-center lg:gap-12 lg:pb-12">
         <div className="flex flex-col justify-center">
-          <h1 className="text-5xl leading-[0.92] font-semibold tracking-[-0.045em] sm:text-7xl lg:text-[5.5rem]">
+          <h1 className="text-4xl leading-tight font-semibold tracking-tight sm:text-5xl lg:text-6xl">
             {archive.displayDate}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground sm:text-lg">
@@ -93,9 +93,7 @@ export function MonthOverview({
           </h2>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
             <Badge>
-              <span className="font-mono text-foreground tabular-nums">
-                {posts.length}
-              </span>
+              <span className="font-mono tabular-nums">{posts.length}</span>
               entries
             </Badge>
             {countries.map((country) => (
@@ -113,7 +111,7 @@ export function MonthOverview({
               <DetailLink
                 detailId={post.id}
                 href={post.url}
-                className="group flex h-full min-h-28 flex-col justify-between gap-4 rounded-lg border bg-background p-4 outline-none transition-colors hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-ring"
+                className="group flex h-full min-h-28 flex-col justify-between gap-4 rounded-xl border bg-card p-5 outline-none transition-colors hover:border-ring/40 hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <div className="flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
                   <time dateTime={post.date} className="shrink-0">
@@ -124,7 +122,7 @@ export function MonthOverview({
                     <span className="truncate">{post.location}</span>
                   </span>
                 </div>
-                <span className="font-heading text-sm font-semibold tracking-wider uppercase">
+                <span className="font-heading text-base font-semibold leading-snug tracking-tight">
                   {post.title}
                 </span>
               </DetailLink>
