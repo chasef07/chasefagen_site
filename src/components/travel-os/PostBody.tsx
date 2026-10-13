@@ -49,7 +49,7 @@ export function PostBody({ post }: { post: BlogPostType }) {
   })
 
   return (
-    <div className="flex max-w-[68ch] flex-col gap-6 text-base leading-8 text-muted-foreground sm:text-lg sm:leading-9">
+    <div className="flex max-w-[68ch] flex-col gap-6 font-serif text-lg leading-8 text-foreground/85 sm:text-xl sm:leading-9">
       {paragraphs.map((paragraph, index) => {
         const followingImages = imagesByParagraph.get(index + 1) ?? []
 

@@ -24,15 +24,15 @@ type GlobeTheme = {
 }
 
 const DEFAULT_GLOBE_THEME: GlobeTheme = {
-  sceneBg: '#f2e8d8',
-  sphereColor: '#e6d6be',
-  lineColor: '#b69d80',
-  markerColor: '#d5672f',
-  currentMarkerColor: '#277a5d',
-  arcColor: '#d5672f',
-  labelColor: '#2f2218',
-  labelMutedColor: '#6b5743',
-  loadingTextColor: '#6b5743',
+  sceneBg: '#fafbfc',
+  sphereColor: '#e4ebf3',
+  lineColor: '#8aa4bc',
+  markerColor: '#365f85',
+  currentMarkerColor: '#397b80',
+  arcColor: '#365f85',
+  labelColor: '#253449',
+  labelMutedColor: '#617085',
+  loadingTextColor: '#617085',
 }
 
 // Convert lat/lng to 3D coordinates on sphere

@@ -7,9 +7,13 @@ import { TravelShell } from '@/components/travel-os/TravelShell'
 import { archives, posts } from '@/content/blog/publication'
 import { currentJourneyStop } from '@/content/world-journey'
 import { buildJournalNavigation } from '@/lib/journal'
-import { Inter } from 'next/font/google'
+import { Manrope, Source_Serif_4 } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
+const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' })
+const sourceSerif = Source_Serif_4({
+  subsets: ['latin'],
+  variable: '--font-source-serif',
+})
 
 export const metadata: Metadata = generatePageMetadata({
   title: 'Chase Fagen Blog',
@@ -29,7 +33,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} font-sans`}
+      className={`${manrope.variable} ${sourceSerif.variable} font-sans`}
       suppressHydrationWarning
     >
       <head>

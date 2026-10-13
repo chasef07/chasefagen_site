@@ -82,6 +82,7 @@ function SidebarProvider({
         style={
           {
             '--sidebar-width': '16rem',
+            '--navigation-rail-width': '4rem',
             ...style,
           } as React.CSSProperties
         }
@@ -106,6 +107,10 @@ function Sidebar({
         <SheetContent
           side="left"
           showCloseButton={false}
+          onCloseAutoFocus={(event) => {
+            event.preventDefault()
+            document.getElementById('journal-navigation-trigger')?.focus()
+          }}
           className={cn(
             'w-[min(18rem,calc(100vw-1rem))] border-sidebar-border bg-sidebar p-0 text-sidebar-foreground',
             className,
@@ -135,11 +140,12 @@ function Sidebar({
         data-slot="sidebar"
         data-state={open ? 'expanded' : 'collapsed'}
         className={cn(
-          'fixed inset-y-0 left-0 z-40 flex w-(--sidebar-width) flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-transform duration-200 ease-out',
-          !open && '-translate-x-full',
+          'fixed inset-y-0 left-(--navigation-rail-width) z-40 flex w-(--sidebar-width) flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-transform duration-200 ease-out',
+          !open && 'invisible -translate-x-full',
           className,
         )}
         {...props}
+        inert={!open}
       >
         {children}
       </aside>
@@ -151,7 +157,7 @@ function SidebarHeader({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="sidebar-header"
-      className={cn('flex shrink-0 flex-col gap-2 p-2 [--radius:0]', className)}
+      className={cn('flex shrink-0 flex-col gap-2 p-2', className)}
       {...props}
     />
   )
@@ -162,7 +168,7 @@ function SidebarContent({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot="sidebar-content"
       className={cn(
-        'flex min-h-0 flex-1 flex-col gap-2 overflow-auto overscroll-contain [--radius:0]',
+        'flex min-h-0 flex-1 flex-col gap-2 overflow-auto overscroll-contain',
         className,
       )}
       {...props}
@@ -257,7 +263,7 @@ function SidebarMenuButton({
       data-slot="sidebar-menu-button"
       data-active={isActive}
       className={cn(
-        'group/menu-button flex h-9 w-full min-w-0 items-center gap-2 overflow-hidden rounded-full px-3 py-2 text-left text-sm text-sidebar-foreground/72 ring-sidebar-ring outline-hidden transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-primary data-[active=true]:font-medium data-[active=true]:text-sidebar-primary-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate',
+        'group/menu-button flex h-9 w-full min-w-0 items-center gap-2 overflow-hidden rounded-lg px-3 py-2 text-left text-sm text-sidebar-foreground ring-sidebar-ring outline-hidden transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:font-medium data-[active=true]:text-sidebar-accent-foreground [&_svg]:size-4 [&_svg]:shrink-0 [&>span:last-child]:truncate',
         className,
       )}
       {...props}
@@ -307,7 +313,7 @@ function SidebarMenuSubButton({
       data-slot="sidebar-menu-sub-button"
       data-active={isActive}
       className={cn(
-        'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-full px-3 text-sm text-sidebar-foreground/62 ring-sidebar-ring outline-hidden transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-primary data-[active=true]:text-sidebar-primary-foreground [&>span:last-child]:truncate [&>svg]:size-3.5 [&>svg]:shrink-0',
+        'flex h-7 min-w-0 -translate-x-px items-center gap-2 overflow-hidden rounded-lg px-3 text-sm text-sidebar-foreground ring-sidebar-ring outline-hidden transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:ring-2 active:bg-sidebar-accent active:text-sidebar-accent-foreground disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-sidebar-accent data-[active=true]:text-sidebar-accent-foreground [&>span:last-child]:truncate [&>svg]:size-3.5 [&>svg]:shrink-0',
         className,
       )}
       {...props}

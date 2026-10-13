@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { Globe2 } from 'lucide-react'
+import { BookOpen, Globe2 } from 'lucide-react'
 
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -59,7 +59,7 @@ export function TodayView({
   return (
     <main className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-8 sm:px-8 sm:py-10">
       <header className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end">
-        <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl">
+        <h1 className="text-3xl font-medium tracking-tight sm:text-4xl">
           {fullDate(today)}
         </h1>
         <div className="flex flex-wrap gap-2">
@@ -109,13 +109,18 @@ export function TodayView({
             </div>
           )}
           <div className="flex flex-col justify-center gap-5 py-6 lg:py-8">
-            <CardHeader>
-              <CardDescription>
-                {latestPost.location} · {entryDate(latestPost)}
-              </CardDescription>
-              <CardTitle className="text-2xl leading-tight sm:text-3xl">
-                {latestPost.title}
-              </CardTitle>
+            <CardHeader className="flex flex-row items-start gap-4">
+              <div className="shrink-0 rounded-xl bg-muted p-3 text-primary">
+                <BookOpen className="size-5" aria-hidden="true" />
+              </div>
+              <div className="flex min-w-0 flex-col gap-2">
+                <CardDescription>
+                  {latestPost.location} · {entryDate(latestPost)}
+                </CardDescription>
+                <CardTitle className="text-2xl leading-tight sm:text-3xl">
+                  {latestPost.title}
+                </CardTitle>
+              </div>
             </CardHeader>
             <CardContent>
               <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground">
