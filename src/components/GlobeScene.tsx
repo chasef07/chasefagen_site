@@ -597,7 +597,10 @@ export default function GlobeScene({
 
   if (!isMounted) {
     return (
-      <div className="w-full h-full flex items-center justify-center bg-[var(--ui-bg-strong)]">
+      <div
+        aria-hidden="true"
+        className="w-full h-full flex items-center justify-center bg-[var(--ui-bg-strong)]"
+      >
         <span className="font-mono tracking-wider text-sm text-[var(--ui-text-muted)]">
           LOADING GLOBE...
         </span>
@@ -609,6 +612,7 @@ export default function GlobeScene({
     <div className="w-full h-full relative">
       {/* Loading state shown until canvas is ready */}
       <div
+        aria-hidden="true"
         className="absolute inset-0 flex items-center justify-center transition-opacity duration-700 pointer-events-none"
         style={{ background: 'transparent', opacity: isReady ? 0 : 1 }}
       >

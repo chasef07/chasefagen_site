@@ -1,5 +1,5 @@
 import { siteConfig } from '@/lib/seo'
-import { posts } from '@/content/blog/publication'
+import { parseBlogDate, posts } from '@/content/blog/publication'
 
 function escapeXml(text: string): string {
   return text
@@ -14,13 +14,13 @@ export async function GET() {
   const baseUrl = siteConfig.url
 
   const sortedPosts = [...posts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+    (a, b) => parseBlogDate(b.date).getTime() - parseBlogDate(a.date).getTime(),
   )
 
   const rssItems = sortedPosts
     .map((post) => {
       const postUrl = `${baseUrl}${post.url}`
-      const pubDate = new Date(post.date).toUTCString()
+      const pubDate = parseBlogDate(post.date).toUTCString()
 
       return `    <item>
       <title>${escapeXml(post.title)}</title>

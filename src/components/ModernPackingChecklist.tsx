@@ -23,6 +23,7 @@ import {
   FieldSet,
 } from '@/components/ui/field'
 import { Progress } from '@/components/ui/progress'
+import { parsePackingProgress } from '@/lib/packing-progress'
 
 type PackingItem = {
   label: string
@@ -136,42 +137,46 @@ const categories: Array<{ name: string; items: PackingItem[] }> = [
   },
 ]
 
-const allItems = categories.flatMap((category, categoryIndex) =>
-  category.items.map((item, itemIndex) => ({
-    ...item,
-    id: `${categoryIndex}-${itemIndex}`,
-  })),
+const itemIds = categories.flatMap((category, categoryIndex) =>
+  category.items.map((_, itemIndex) => `${categoryIndex}-${itemIndex}`),
 )
+const storageKey = 'packing-checklist-progress'
 
 export default function ModernPackingChecklist() {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set())
+  const [storageError, setStorageError] = useState<string | null>(null)
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem('packing-checklist-progress')
-      if (saved) setCheckedItems(new Set(JSON.parse(saved)))
+      const saved = localStorage.getItem(storageKey)
+      if (saved !== null) setCheckedItems(parsePackingProgress(saved, itemIds))
     } catch {
-      localStorage.removeItem('packing-checklist-progress')
+      setStorageError(
+        'Saved progress could not be loaded. Reset the checklist to start fresh.',
+      )
     }
   }, [])
 
-  useEffect(() => {
-    localStorage.setItem(
-      'packing-checklist-progress',
-      JSON.stringify([...checkedItems]),
-    )
-  }, [checkedItems])
-
-  const toggleItem = (itemId: string) => {
-    setCheckedItems((current) => {
-      const next = new Set(current)
-      if (next.has(itemId)) next.delete(itemId)
-      else next.add(itemId)
-      return next
-    })
+  function updateCheckedItems(next: Set<string>) {
+    setCheckedItems(next)
+    try {
+      localStorage.setItem(storageKey, JSON.stringify([...next]))
+      setStorageError(null)
+    } catch {
+      setStorageError(
+        'Progress could not be saved on this device. Changes will be lost when you reload.',
+      )
+    }
   }
 
-  const progress = Math.round((checkedItems.size / allItems.length) * 100)
+  const toggleItem = (itemId: string) => {
+    const next = new Set(checkedItems)
+    if (next.has(itemId)) next.delete(itemId)
+    else next.add(itemId)
+    updateCheckedItems(next)
+  }
+
+  const progress = Math.round((checkedItems.size / itemIds.length) * 100)
 
   return (
     <div className="flex flex-col gap-8">
@@ -179,11 +184,16 @@ export default function ModernPackingChecklist() {
         <CardHeader>
           <CardTitle>Packing progress</CardTitle>
           <CardDescription>
-            {checkedItems.size} of {allItems.length} items packed
+            {checkedItems.size} of {itemIds.length} items packed
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Progress value={progress} aria-label={`${progress}% packed`} />
+          {storageError && (
+            <p role="alert" className="mt-3 text-sm text-destructive">
+              {storageError}
+            </p>
+          )}
         </CardContent>
         <CardFooter>
           <Button
@@ -192,7 +202,7 @@ export default function ModernPackingChecklist() {
             size="sm"
             onClick={() => {
               if (!window.confirm('Clear all checked items?')) return
-              setCheckedItems(new Set())
+              updateCheckedItems(new Set())
             }}
           >
             <RotateCcw data-icon="inline-start" />

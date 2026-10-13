@@ -112,7 +112,7 @@ function Sidebar({
             document.getElementById('journal-navigation-trigger')?.focus()
           }}
           className={cn(
-            'w-[min(18rem,calc(100vw-1rem))] border-sidebar-border bg-sidebar p-0 text-sidebar-foreground',
+            'data-[side=left]:w-[min(18rem,calc(100vw-1rem))] border-sidebar-border bg-sidebar p-0 text-sidebar-foreground',
             className,
           )}
           {...props}
@@ -169,19 +169,6 @@ function SidebarContent({ className, ...props }: React.ComponentProps<'div'>) {
       data-slot="sidebar-content"
       className={cn(
         'flex min-h-0 flex-1 flex-col gap-2 overflow-auto overscroll-contain',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function SidebarFooter({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="sidebar-footer"
-      className={cn(
-        'flex shrink-0 flex-col gap-2 border-t border-sidebar-border p-2',
         className,
       )}
       {...props}
@@ -324,7 +311,6 @@ function SidebarMenuSubButton({
 export {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarInset,
   SidebarMenu,
