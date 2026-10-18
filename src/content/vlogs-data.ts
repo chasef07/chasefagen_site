@@ -8,6 +8,13 @@ export interface Vlog {
 
 export const vlogsData: Vlog[] = [
   {
+    id: 'exploring-the-balkans-2026',
+    title: 'Exploring the Balkans 2026: The coastline, the cities, the feeling',
+    country: 'Balkans',
+    description: 'Exploring the coastline and cities of the Balkans in 2026.',
+    youtubeId: '625Bw0Dgm60',
+  },
+  {
     id: 'hiking-bernese-oberland',
     title: 'Hiking Bernese Oberland',
     country: 'Switzerland',

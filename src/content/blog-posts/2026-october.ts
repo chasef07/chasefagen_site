@@ -2,6 +2,31 @@ import { BlogPost } from '../../types/blog'
 
 export const october2026Posts: BlogPost[] = [
   {
+    id: 'anywhere',
+    title: 'Anywhere',
+    date: '2026-10-17',
+    location: 'Clearwater, Florida',
+    country: 'United States',
+    slug: 'anywhere',
+    year: '2026',
+    excerpt:
+      'Enjoying time at home with family, finding a fruitful life in the basics, and asking where I want to compound and grow next.',
+    content: `Holy blog. It's been so fun dumping my thoughts onto this canvas for the past two years.
+
+What is there to do in this life on my travels? Learning new things. You walk to different temples. You go to different street markets. You eat at different cafes.
+
+When you're at home, everybody asks, "Oh, what are you going to do today?" You just do the basics: work out, stimulate the intellect. That's about it. That is a fruitful life.
+
+But real focus, real determination is required when growing as a man, holding yourself to a high standard, putting yourself in those places that you want to be.
+
+Yeah, I've been enjoying my time at home. I saw my brother today. Been hanging out with my parents. It's been nice.
+
+I am planning my trips ahead: to Costa Rica, to ski with Rachel's family. And then what comes after? Where do I want to compound? Where do I want to be? Where do I want to grow?
+
+Anywhere.`,
+    images: [],
+  },
+  {
     id: 'my-lifes-work',
     title: "My Life's Work",
     date: '2026-10-12',
