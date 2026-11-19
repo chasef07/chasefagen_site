@@ -1,28 +1,30 @@
-import { Backpack } from 'lucide-react'
+import { PackingChecklist } from '@/components/journal/PackingChecklist'
+import { generatePageMetadata } from '@/lib/seo'
 
-import ModernPackingChecklist from '@/components/ModernPackingChecklist'
-import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
+export const metadata = generatePageMetadata({
+  title: 'Packing list',
+  description: 'The practical packing list Chase uses for long-term travel.',
+  path: '/packing-checklist',
+  keywords: ['packing list', 'travel essentials'],
+})
 
 export default function PackingChecklistPage() {
   return (
-    <main className="mx-auto flex max-w-6xl flex-col gap-10 px-5 py-10 sm:px-8 sm:py-14">
-      <header className="flex flex-col gap-4">
-        <Badge variant="secondary" className="w-fit">
-          <Backpack />
+    <main className="mx-auto w-full max-w-6xl px-4 sm:px-8">
+      <header className="flex flex-col gap-5 border-b border-rule pt-14 pb-12 sm:pt-20">
+        <p className="font-mono text-[13px] tracking-[0.08em] text-ink-soft uppercase">
           Carry-on tested
-        </Badge>
-        <div>
-          <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl">
-            Packing
-          </h1>
-          <p className="mt-3 max-w-2xl text-lg text-muted-foreground">
-            The compact list that made it through a year on the road.
-          </p>
-        </div>
+        </p>
+        <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] leading-[0.88] font-light tracking-[-0.035em] italic">
+          Packing
+        </h1>
+        <p className="max-w-2xl text-xl leading-relaxed text-ink-soft">
+          The compact list that made it through a year on the road.
+        </p>
       </header>
-      <Separator />
-      <ModernPackingChecklist />
+      <div className="pt-12">
+        <PackingChecklist />
+      </div>
     </main>
   )
 }

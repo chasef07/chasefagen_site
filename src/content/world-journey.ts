@@ -1,3 +1,5 @@
+import type { CountryName } from '@/lib/countries'
+
 export interface CountryPage {
   name: string
   slug: string
@@ -437,3 +439,10 @@ export const journeyRoute: readonly JourneyStop[] = itinerary.map((stop) => {
 })
 
 export const currentJourneyStop = journeyRoute.at(-1)!
+
+export const upcomingCountries: readonly CountryName[] = [
+  'Costa Rica',
+  'Netherlands',
+  'France',
+  'Georgia',
+]

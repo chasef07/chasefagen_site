@@ -3,14 +3,14 @@ import { describe, expect, test } from 'bun:test'
 import { archives, posts } from '@/content/blog/publication'
 import { countryPages } from '@/content/world-journey'
 import { buildJournalYears, findClosestEntriesByYear } from './journal'
-import { getCountryCode } from './country-flags'
+import { getCountryCode } from './countries'
 
 describe('Journal chronology', () => {
   test('derives every month from posts and sorts newest first', () => {
     const years = buildJournalYears(posts, archives)
 
     expect(years.map(({ year }) => year)).toEqual([2026, 2025, 2024])
-    expect(years[0].months[0].key).toBe('2026-10')
+    expect(years[0].months[0].key).toBe('2026-11')
     expect(
       years
         .find(({ year }) => year === 2025)

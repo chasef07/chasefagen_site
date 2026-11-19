@@ -4,14 +4,32 @@ import {
   archiveStaticParams,
   archives,
   createBlogPublication,
+  getAdjacentArchives,
+  getAdjacentPosts,
   getArchive,
   getPost,
   getPostsForArchive,
   postStaticParams,
   parseBlogDate,
+  posts,
 } from './publication'
 
 describe('Blog publication interface', () => {
+  test('numbers entries from the first post and links neighbors by date', () => {
+    const anywhere = getPost('2026', 'october', 'anywhere')!
+
+    expect(posts.at(-1)?.entryNumber).toBe(1)
+    expect(posts[0].entryNumber).toBe(posts.length)
+    expect(getAdjacentPosts(anywhere)).toMatchObject({
+      older: { slug: 'my-lifes-work' },
+      newer: { date: '2026-11-18' },
+    })
+    expect(getAdjacentArchives(getArchive('2026', 'october')!)).toMatchObject({
+      older: { url: '/blog/2026/september' },
+      newer: { url: '/blog/2026/november' },
+    })
+  })
+
   test('gives Archives and Posts explicit canonical paths', () => {
     const archive = getArchive('2026', 'july')
     const post = getPost('2026', 'july', 'european-living-in-ericeira')

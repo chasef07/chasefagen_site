@@ -26,16 +26,6 @@ export type JournalYear = {
   months: JournalMonth[]
 }
 
-export type JournalNavigationMonth = Omit<JournalMonth, 'posts'> & {
-  postCount: number
-}
-
-export type JournalNavigationYear = {
-  year: number
-  postCount: number
-  months: JournalNavigationMonth[]
-}
-
 export type JournalEcho = {
   year: number
   post: PublishedPost
@@ -124,20 +114,6 @@ export function buildJournalYears(
       ),
       months: yearMonths,
     }))
-}
-
-export function buildJournalNavigation(
-  postRecords: PublishedPost[],
-  archiveRecords: BlogArchive[],
-): JournalNavigationYear[] {
-  return buildJournalYears(postRecords, archiveRecords).map((year) => ({
-    year: year.year,
-    postCount: year.postCount,
-    months: year.months.map(({ posts: monthPosts, ...month }) => ({
-      ...month,
-      postCount: monthPosts.length,
-    })),
-  }))
 }
 
 export function findClosestEntriesByYear(

@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { CountryDossier } from '@/components/travel-os/CountryDossier'
+import { CountryDossier } from '@/components/journal/CountryDossier'
 import { countryPages, getCountryPage } from '@/content/world-journey'
 import { generatePageMetadata } from '@/lib/seo'
 
@@ -31,9 +31,5 @@ export default async function CountryPage({ params }: Props) {
   const country = getCountryPage(slug)
   if (!country) notFound()
 
-  return (
-    <main className="min-h-full">
-      <CountryDossier country={country} />
-    </main>
-  )
+  return <CountryDossier country={country} />
 }

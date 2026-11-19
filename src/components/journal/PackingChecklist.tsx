@@ -1,28 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { RotateCcw } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
-import {
-  Field,
-  FieldContent,
-  FieldDescription,
-  FieldGroup,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from '@/components/ui/field'
-import { Progress } from '@/components/ui/progress'
 import { parsePackingProgress } from '@/lib/packing-progress'
 
 type PackingItem = {
@@ -142,7 +121,7 @@ const itemIds = categories.flatMap((category, categoryIndex) =>
 )
 const storageKey = 'packing-checklist-progress'
 
-export default function ModernPackingChecklist() {
+export function PackingChecklist() {
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set())
   const [storageError, setStorageError] = useState<string | null>(null)
 
@@ -179,94 +158,98 @@ export default function ModernPackingChecklist() {
   const progress = Math.round((checkedItems.size / itemIds.length) * 100)
 
   return (
-    <div className="flex flex-col gap-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Packing progress</CardTitle>
-          <CardDescription>
-            {checkedItems.size} of {itemIds.length} items packed
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Progress value={progress} aria-label={`${progress}% packed`} />
+    <div className="flex flex-col gap-14">
+      <section
+        aria-label="Packing progress"
+        className="flex flex-wrap items-end justify-between gap-6 border-b border-ink pb-6"
+      >
+        <div className="flex min-w-0 flex-[1_1_20rem] flex-col gap-3">
+          <p className="font-mono text-[13px] tracking-[0.08em] uppercase">
+            {checkedItems.size} of {itemIds.length} packed · {progress}%
+          </p>
+          <div aria-hidden="true" className="h-2 bg-paper-deep">
+            <div
+              className="h-full bg-accent transition-[width]"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
           {storageError && (
-            <p role="alert" className="mt-3 text-sm text-destructive">
+            <p role="alert" className="font-mono text-[13px] text-accent">
               {storageError}
             </p>
           )}
-        </CardContent>
-        <CardFooter>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              if (!window.confirm('Clear all checked items?')) return
-              updateCheckedItems(new Set())
-            }}
-          >
-            <RotateCcw data-icon="inline-start" />
-            Reset
-          </Button>
-        </CardFooter>
-      </Card>
-
-      <section aria-labelledby="packing-tips" className="flex flex-col gap-4">
-        <h2 id="packing-tips" className="text-2xl font-semibold">
-          Four rules
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {tips.map((tip) => (
-            <Card key={tip} className="py-5">
-              <CardContent className="text-sm text-muted-foreground">
-                {tip}
-              </CardContent>
-            </Card>
-          ))}
         </div>
+        <button
+          type="button"
+          onClick={() => {
+            if (!window.confirm('Clear all checked items?')) return
+            updateCheckedItems(new Set())
+          }}
+          className="min-h-11 border border-ink px-4 font-mono text-[13px] tracking-[0.08em] uppercase hover:bg-ink hover:text-paper"
+        >
+          Reset
+        </button>
       </section>
 
-      <div className="grid items-start gap-5 lg:grid-cols-2">
+      <section aria-labelledby="packing-rules" className="flex flex-col gap-5">
+        <h2 id="packing-rules" className="font-display text-[34px]">
+          Four rules
+        </h2>
+        <ol className="grid gap-x-10 gap-y-4 sm:grid-cols-2">
+          {tips.map((tip, index) => (
+            <li key={tip} className="flex gap-4 text-lg leading-relaxed">
+              <span className="font-display text-3xl leading-none text-accent">
+                {index + 1}
+              </span>
+              {tip}
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <div className="grid items-start gap-x-16 gap-y-12 lg:grid-cols-2">
         {categories.map((category, categoryIndex) => (
-          <Card key={category.name}>
-            <CardHeader>
-              <CardTitle>{category.name}</CardTitle>
-              <CardDescription>{category.items.length} items</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <FieldSet>
-                <FieldLegend className="sr-only">{category.name}</FieldLegend>
-                <FieldGroup data-slot="checkbox-group">
-                  {category.items.map((item, itemIndex) => {
-                    const id = `${categoryIndex}-${itemIndex}`
-                    return (
-                      <Field key={id} orientation="horizontal">
-                        <Checkbox
-                          id={id}
-                          checked={checkedItems.has(id)}
-                          onCheckedChange={() => toggleItem(id)}
-                        />
-                        <FieldContent>
-                          <FieldLabel htmlFor={id}>{item.label}</FieldLabel>
-                          {item.href && (
-                            <FieldDescription>
-                              <a
-                                href={item.href}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                Product link
-                              </a>
-                            </FieldDescription>
-                          )}
-                        </FieldContent>
-                      </Field>
-                    )
-                  })}
-                </FieldGroup>
-              </FieldSet>
-            </CardContent>
-          </Card>
+          <fieldset key={category.name} className="flex flex-col gap-1">
+            <legend className="mb-3 flex w-full items-baseline justify-between border-b border-ink pb-2">
+              <span className="font-display text-2xl">{category.name}</span>
+              <span className="font-mono text-xs text-ink-soft">
+                {category.items.length} items
+              </span>
+            </legend>
+            {category.items.map((item, itemIndex) => {
+              const id = `${categoryIndex}-${itemIndex}`
+              return (
+                <div
+                  key={id}
+                  className="flex min-h-11 items-center gap-3 border-b border-rule"
+                >
+                  <input
+                    id={id}
+                    type="checkbox"
+                    checked={checkedItems.has(id)}
+                    onChange={() => toggleItem(id)}
+                    className="peer size-4 shrink-0 accent-accent"
+                  />
+                  <label
+                    htmlFor={id}
+                    className="flex-1 py-2 text-lg peer-checked:text-ink-soft peer-checked:line-through"
+                  >
+                    {item.label}
+                  </label>
+                  {item.href && (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-mono text-xs text-ink-soft hover:text-accent"
+                    >
+                      Link ↗
+                    </a>
+                  )}
+                </div>
+              )
+            })}
+          </fieldset>
         ))}
       </div>
     </div>
