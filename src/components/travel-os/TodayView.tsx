@@ -12,7 +12,6 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
-import { DetailLink } from '@/components/travel-os/DetailLink'
 import type { PublishedPost } from '@/content/blog/publication'
 import { parseBlogDate } from '@/content/blog/publication'
 import { isPreoptimizedImage } from '@/lib/images'
@@ -82,8 +81,7 @@ export function TodayView({
 
       <Separator />
 
-      <DetailLink
-        detailId={latestPost.id}
+      <Link
         href={latestPost.url}
         className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
       >
@@ -129,7 +127,7 @@ export function TodayView({
             </CardContent>
           </div>
         </Card>
-      </DetailLink>
+      </Link>
 
       <section className="flex flex-col gap-4">
         <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
@@ -143,9 +141,8 @@ export function TodayView({
 
         <div className="grid gap-4 md:grid-cols-2">
           {echoes.map((echo) => (
-            <DetailLink
+            <Link
               key={echo.year}
-              detailId={echo.post.id}
               href={echo.post.url}
               className="group block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             >
@@ -165,7 +162,7 @@ export function TodayView({
                   </CardDescription>
                 </CardHeader>
               </Card>
-            </DetailLink>
+            </Link>
           ))}
         </div>
       </section>

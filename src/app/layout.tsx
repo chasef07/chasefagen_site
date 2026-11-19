@@ -3,10 +3,6 @@ import './globals.css'
 import { generatePageMetadata, generateWebsiteJsonLd } from '@/lib/seo'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Analytics } from '@vercel/analytics/react'
-import { TravelShell } from '@/components/travel-os/TravelShell'
-import { archives, posts } from '@/content/blog/publication'
-import { currentJourneyStop } from '@/content/world-journey'
-import { buildJournalNavigation } from '@/lib/journal'
 import { Manrope, Source_Serif_4 } from 'next/font/google'
 
 const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' })
@@ -23,10 +19,8 @@ export const metadata: Metadata = generatePageMetadata({
 
 export default function RootLayout({
   children,
-  reader,
 }: {
   children: React.ReactNode
-  reader: React.ReactNode
 }) {
   const websiteJsonLd = generateWebsiteJsonLd()
 
@@ -79,13 +73,7 @@ export default function RootLayout({
         >
           Skip to content
         </a>
-        <TravelShell
-          years={buildJournalNavigation(posts, archives)}
-          currentLocation={currentJourneyStop}
-          detail={reader}
-        >
-          {children}
-        </TravelShell>
+        <div id="main-content">{children}</div>
         <SpeedInsights />
         <Analytics />
       </body>

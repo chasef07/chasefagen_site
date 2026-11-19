@@ -1,8 +1,8 @@
+import Link from 'next/link'
 import { Radio } from 'lucide-react'
 
 import GlobeExperience from '@/components/globe/GlobeExperience'
 import { CountryFlag } from '@/components/travel-os/CountryFlag'
-import { DetailLink } from '@/components/travel-os/DetailLink'
 import { Badge } from '@/components/ui/badge'
 import { countryPages } from '@/content/world-journey'
 
@@ -52,9 +52,8 @@ export default function WorldPage() {
             className="grid grid-cols-3 gap-x-2 gap-y-2 min-[480px]:grid-cols-4 sm:grid-cols-5 lg:grid-cols-5"
           >
             {countryPages.map((country) => (
-              <DetailLink
+              <Link
                 key={country.slug}
-                detailId={`country-${country.slug}`}
                 href={`/countries/${country.slug}`}
                 className="group flex min-w-0 flex-col items-center gap-1 rounded-md px-1 py-1 text-center outline-none transition-colors hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-ring"
               >
@@ -65,7 +64,7 @@ export default function WorldPage() {
                 <span className="line-clamp-2 min-h-6 text-[9px] leading-3 font-semibold tracking-wider text-muted-foreground uppercase group-hover:text-foreground">
                   {country.name}
                 </span>
-              </DetailLink>
+              </Link>
             ))}
           </nav>
         </div>

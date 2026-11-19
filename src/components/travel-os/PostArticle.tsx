@@ -21,7 +21,6 @@ export function PostArticle({ post }: { post: PublishedPost }) {
     <article className="mx-auto flex w-full max-w-3xl flex-col gap-10 px-6 py-10 sm:px-10 sm:py-14">
       <header className="flex flex-col gap-4">
         <h1
-          data-detail-title
           tabIndex={-1}
           className="font-serif text-4xl leading-tight font-semibold tracking-tight outline-none sm:text-5xl"
         >

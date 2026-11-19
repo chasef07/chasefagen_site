@@ -1,6 +1,6 @@
+import Link from 'next/link'
 import { MapPin } from 'lucide-react'
 
-import { DetailLink } from '@/components/travel-os/DetailLink'
 import { CountryFlag } from '@/components/travel-os/CountryFlag'
 import {
   MonthGallery,
@@ -108,8 +108,7 @@ export function MonthOverview({
         <ol className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {posts.map((post) => (
             <li key={post.id} className="h-full min-w-0">
-              <DetailLink
-                detailId={post.id}
+              <Link
                 href={post.url}
                 className="group flex h-full min-h-28 flex-col justify-between gap-4 rounded-xl border bg-card p-5 outline-none transition-colors hover:border-ring/40 hover:bg-accent/40 focus-visible:ring-2 focus-visible:ring-ring"
               >
@@ -125,7 +124,7 @@ export function MonthOverview({
                 <span className="font-heading text-base font-semibold leading-snug tracking-tight">
                   {post.title}
                 </span>
-              </DetailLink>
+              </Link>
             </li>
           ))}
         </ol>

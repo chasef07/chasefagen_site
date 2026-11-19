@@ -2,7 +2,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Clock, MapPin } from 'lucide-react'
 
-import { DetailLink } from '@/components/travel-os/DetailLink'
 import { CountryFlag } from '@/components/travel-os/CountryFlag'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
@@ -52,7 +51,6 @@ export function CountryDossier({ country }: { country: CountryPage }) {
         <div className="flex items-center gap-4">
           <CountryFlag country={country.name} className="text-5xl" />
           <h1
-            data-detail-title
             tabIndex={-1}
             className="text-4xl font-semibold tracking-tight outline-none sm:text-6xl"
           >
@@ -109,9 +107,8 @@ export function CountryDossier({ country }: { country: CountryPage }) {
         {posts.length > 0 ? (
           <div className="grid gap-4 md:grid-cols-2">
             {posts.map((post) => (
-              <DetailLink
+              <Link
                 key={post.id}
-                detailId={post.id}
                 href={post.url}
                 className="group block h-full rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
@@ -147,7 +144,7 @@ export function CountryDossier({ country }: { country: CountryPage }) {
                     </CardDescription>
                   </CardHeader>
                 </Card>
-              </DetailLink>
+              </Link>
             ))}
           </div>
         ) : (

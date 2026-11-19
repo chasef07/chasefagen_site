@@ -1,9 +1,9 @@
 'use client'
 
+import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useState } from 'react'
 import { ArrowUpRight } from 'lucide-react'
-import { DetailLink } from '@/components/travel-os/DetailLink'
 import { Button } from '@/components/ui/button'
 import {
   journeyRoute,
@@ -128,13 +128,12 @@ export default function GlobeExperience() {
           </select>
           {selectedCountry?.countrySlug && (
             <Button variant="outline" asChild>
-              <DetailLink
-                detailId={`globe-country-${selectedCountry.countrySlug}`}
+              <Link
                 href={`/countries/${selectedCountry.countrySlug}`}
               >
                 Open country
                 <ArrowUpRight />
-              </DetailLink>
+              </Link>
             </Button>
           )}
         </div>
