@@ -30,7 +30,7 @@ export default function WorldPage() {
           {countryPages.length} countries · {journeyRoute.length} stops
         </p>
         <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] leading-[0.88] font-light tracking-[-0.035em] italic">
-          The world
+          World view
         </h1>
         <p className="max-w-2xl text-xl leading-relaxed text-ink-soft">
           Rotate the journey, choose a flag, and drop directly into the stories
@@ -40,7 +40,7 @@ export default function WorldPage() {
 
       <div className="flex flex-wrap gap-x-16 gap-y-12 pt-12">
         <section
-          aria-label="Journey globe"
+          aria-label="Journey atlas"
           className="min-w-0 flex-[999_1_34rem]"
         >
           <GlobeExperience />

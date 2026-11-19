@@ -40,7 +40,30 @@ export default async function ArchivePage({ params }: Props) {
   const { year, month } = await params
   const archive = getArchive(year, month)
   const monthPosts = getPostsForArchive(year, month)
-  if (!archive || monthPosts.length === 0) notFound()
+  if (!archive) notFound()
+
+  if (monthPosts.length === 0) {
+    return (
+      <main className="mx-auto flex w-full max-w-6xl flex-col gap-5 px-4 pt-14 sm:px-8 sm:pt-20">
+        <p className="font-mono text-[13px] tracking-[0.08em] text-ink-soft uppercase">
+          {archive.displayDate}
+        </p>
+        <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] leading-[0.88] font-light tracking-[-0.035em] italic">
+          No entries yet
+        </h1>
+        <p className="max-w-xl text-xl leading-relaxed text-ink-soft">
+          This month is on the timeline, but its first post has not been
+          published.
+        </p>
+        <Link
+          href="/"
+          className="w-fit font-mono text-[13px] tracking-[0.08em] text-accent uppercase underline decoration-1 underline-offset-[6px]"
+        >
+          ← Return to Today
+        </Link>
+      </main>
+    )
+  }
 
   const oldestFirst = [...monthPosts].reverse()
   const countries = [

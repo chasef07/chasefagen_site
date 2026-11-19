@@ -15,7 +15,7 @@ export default function VlogsPage() {
     <main className="mx-auto w-full max-w-6xl px-4 sm:px-8">
       <header className="flex flex-col gap-5 border-b border-rule pt-14 pb-12 sm:pt-20">
         <p className="font-mono text-[13px] tracking-[0.08em] text-ink-soft uppercase">
-          {vlogsData.length} films
+          {vlogsData.length} videos
         </p>
         <h1 className="font-display text-[clamp(3.5rem,11vw,9rem)] leading-[0.88] font-light tracking-[-0.035em] italic">
           Vlogs
