@@ -7,15 +7,7 @@ import { useEffect, useRef } from 'react'
 import type { Region } from '@/lib/countries'
 import { regionNames } from '@/lib/countries'
 import type { RouteCell } from '@/lib/route-band'
-
-const regionFill: Record<Region, string> = {
-  home: 'bg-region-home',
-  'middle-east': 'bg-region-middle-east',
-  africa: 'bg-region-africa',
-  asia: 'bg-region-asia',
-  'latin-america': 'bg-region-latin-america',
-  europe: 'bg-region-europe',
-}
+import { regionFill } from '@/components/journal/region-fill'
 
 const countryName = new Intl.DisplayNames(['en'], { type: 'region' })
 

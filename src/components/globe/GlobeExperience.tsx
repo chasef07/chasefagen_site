@@ -3,8 +3,6 @@
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { useCallback, useEffect, useState } from 'react'
-import { ArrowUpRight } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 import {
   journeyRoute,
   journeyStopKey,
@@ -58,20 +56,24 @@ export default function GlobeExperience() {
     ? 'Click and drag to explore destinations'
     : 'Tap and drag to explore destinations'
   return (
-    <div data-testid="globe-experience" className="flex flex-col gap-3 lg:mt-0">
-      <div className="h-[300px] w-full overflow-hidden rounded-xl border bg-background sm:h-[380px] lg:h-[440px] xl:h-[500px]">
+    <div data-testid="globe-experience" className="flex flex-col gap-3">
+      <div className="h-[300px] w-full overflow-hidden border border-rule bg-paper sm:h-[380px] lg:h-[460px] xl:h-[520px]">
         {status === 'failed' ? (
-          <div className="flex h-full flex-col items-center justify-center gap-4 bg-card p-6 text-center">
+          <div className="flex h-full flex-col items-center justify-center gap-4 p-6 text-center">
             <p
               data-testid="globe-status"
               role="status"
-              className="text-sm text-muted-foreground"
+              className="font-mono text-sm text-ink-soft"
             >
               Globe unavailable. The rest of the journey is still available.
             </p>
-            <Button variant="outline" onClick={() => void load(true)}>
+            <button
+              type="button"
+              onClick={() => void load(true)}
+              className="min-h-11 border border-ink px-4 font-mono text-[13px] tracking-[0.08em] uppercase hover:bg-ink hover:text-paper"
+            >
               Retry globe
-            </Button>
+            </button>
           </div>
         ) : (
           <div className="relative h-full w-full">
@@ -92,13 +94,10 @@ export default function GlobeExperience() {
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p
-          data-testid="globe-caption"
-          className="text-sm text-muted-foreground"
-        >
+      <div className="flex flex-col gap-3 font-mono text-[13px] sm:flex-row sm:items-center sm:justify-between">
+        <p data-testid="globe-caption" className="text-ink-soft">
           {selectedCountry
-            ? `${selectedCountry.stopName ? `${selectedCountry.stopName}, ` : ''}${selectedCountry.name} • ${selectedCountry.visitDate}`
+            ? `${selectedCountry.stopName ? `${selectedCountry.stopName}, ` : ''}${selectedCountry.name} · ${selectedCountry.visitDate}`
             : guidance}
         </p>
         <div className="flex flex-wrap items-center gap-2">
@@ -112,7 +111,7 @@ export default function GlobeExperience() {
                 ) ?? null,
               )
             }
-            className="h-9 max-w-full rounded-md border border-input bg-background px-3 text-sm text-foreground shadow-xs outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="min-h-11 max-w-full border border-ink bg-paper px-3"
           >
             <option value="">Choose destination</option>
             {journeyRoute.map((country) => (
@@ -127,12 +126,12 @@ export default function GlobeExperience() {
             ))}
           </select>
           {selectedCountry?.countrySlug && (
-            <Button variant="outline" asChild>
-              <Link href={`/countries/${selectedCountry.countrySlug}`}>
-                Open country
-                <ArrowUpRight />
-              </Link>
-            </Button>
+            <Link
+              href={`/countries/${selectedCountry.countrySlug}`}
+              className="inline-flex min-h-11 items-center border border-ink px-4 tracking-[0.08em] uppercase hover:bg-ink hover:text-paper"
+            >
+              Open country →
+            </Link>
           )}
         </div>
       </div>
