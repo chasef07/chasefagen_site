@@ -1,120 +1,59 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
-@import 'shadcn/tailwind.css';
 @import 'flag-icons/css/flag-icons.min.css';
 
-@custom-variant dark (&:is(.dark *));
-@plugin '@tailwindcss/typography';
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --font-sans: var(--font-manrope);
-  --font-serif: var(--font-source-serif), Georgia, serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --font-heading: var(--font-sans);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-paper: #f3eee3;
+  --color-paper-deep: #eae2d2;
+  --color-ink: #211c16;
+  --color-ink-soft: #6b6257;
+  --color-rule: #cfc5b4;
+  --color-accent: #a8461f;
+
+  --color-region-home: #8c8273;
+  --color-region-middle-east: #5b4a8b;
+  --color-region-africa: #b07a1e;
+  --color-region-asia: #2e6b5e;
+  --color-region-latin-america: #c4643f;
+  --color-region-europe: #3f6ea5;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-serif: var(--font-newsreader), Georgia, serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 }
 
 :root {
   color-scheme: light;
-  --radius: 0.625rem;
-  --background: #fafbfc;
-  --foreground: #253449;
-  --card: #ffffff;
-  --card-foreground: var(--foreground);
-  --popover: #ffffff;
-  --popover-foreground: var(--foreground);
-  --primary: #365f85;
-  --primary-foreground: #ffffff;
-  --secondary: #e8eef5;
-  --secondary-foreground: #34516e;
-  --muted: #edf1f5;
-  --muted-foreground: #617085;
-  --accent: #e3edf7;
-  --accent-foreground: #294e73;
-  --destructive: #b42318;
-  --border: #dce3eb;
-  --input: #c6d1de;
-  --ring: #507a9e;
-  --chart-1: #365f85;
-  --chart-2: #6b91ad;
-  --chart-3: #8aa4bc;
-  --chart-4: #617085;
-  --chart-5: #5e8b89;
-  --sidebar: #f2f4f7;
-  --sidebar-foreground: #41536b;
-  --sidebar-primary: var(--primary);
-  --sidebar-primary-foreground: var(--primary-foreground);
-  --sidebar-accent: #dfe9f4;
-  --sidebar-accent-foreground: #294e73;
-  --sidebar-border: var(--border);
-  --sidebar-ring: var(--ring);
 
-  /* The WebGL globe reads these semantic aliases directly. */
-  --ui-body-bg: var(--background);
-  --ui-bg-strong: var(--secondary);
-  --ui-bg-elevated: var(--card);
-  --ui-border-strong: #8aa4bc;
-  --ui-text-primary: var(--foreground);
-  --ui-text-muted: var(--muted-foreground);
-  --ui-accent: var(--primary);
-  --ui-current-location: #397b80;
-  --ui-globe-bg: var(--background);
-  --ui-globe-sphere: #e4ebf3;
-  --ui-globe-line: #8aa4bc;
+  /* The WebGL globe reads these names directly. */
+  --ui-body-bg: #f3eee3;
+  --ui-bg-strong: #eae2d2;
+  --ui-bg-elevated: #fbf8f2;
+  --ui-border-strong: #b5a990;
+  --ui-text-primary: #211c16;
+  --ui-text-muted: #6b6257;
+  --ui-accent: #a8461f;
+  --ui-current-location: #a8461f;
+  --ui-globe-bg: #f3eee3;
+  --ui-globe-sphere: #fbf8f2;
+  --ui-globe-line: #b5a990;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-
-  body {
-    @apply antialiased bg-background text-foreground;
+  html {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-serif);
+    -webkit-font-smoothing: antialiased;
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--accent-foreground);
+    background: var(--color-accent);
+    color: var(--color-paper);
   }
-  html {
-    @apply font-sans;
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 }
 

@@ -128,9 +128,7 @@ export default function GlobeExperience() {
           </select>
           {selectedCountry?.countrySlug && (
             <Button variant="outline" asChild>
-              <Link
-                href={`/countries/${selectedCountry.countrySlug}`}
-              >
+              <Link href={`/countries/${selectedCountry.countrySlug}`}>
                 Open country
                 <ArrowUpRight />
               </Link>

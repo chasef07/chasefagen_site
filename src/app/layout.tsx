@@ -3,12 +3,27 @@ import './globals.css'
 import { generatePageMetadata, generateWebsiteJsonLd } from '@/lib/seo'
 import { SpeedInsights } from '@vercel/speed-insights/react'
 import { Analytics } from '@vercel/analytics/react'
-import { Manrope, Source_Serif_4 } from 'next/font/google'
+import { Fraunces, IBM_Plex_Mono, Newsreader } from 'next/font/google'
 
-const manrope = Manrope({ subsets: ['latin'], variable: '--font-manrope' })
-const sourceSerif = Source_Serif_4({
+import { SiteFooter } from '@/components/journal/SiteFooter'
+import { SiteHeader } from '@/components/journal/SiteHeader'
+
+const fraunces = Fraunces({
   subsets: ['latin'],
-  variable: '--font-source-serif',
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-fraunces',
+})
+const newsreader = Newsreader({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  axes: ['opsz'],
+  variable: '--font-newsreader',
+})
+const plexMono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-plex-mono',
 })
 
 export const metadata: Metadata = generatePageMetadata({
@@ -27,7 +42,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${sourceSerif.variable} font-sans`}
+      className={`${fraunces.variable} ${newsreader.variable} ${plexMono.variable}`}
       suppressHydrationWarning
     >
       <head>
@@ -46,7 +61,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
       </head>
-      <body suppressHydrationWarning className="min-h-screen">
+      <body suppressHydrationWarning className="flex min-h-svh flex-col">
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
             <script
@@ -69,11 +84,15 @@ export default function RootLayout({
 
         <a
           href="#main-content"
-          className="fixed left-3 top-3 z-[100] -translate-y-20 rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground transition-transform focus:translate-y-0"
+          className="fixed top-3 left-3 z-50 -translate-y-20 bg-ink px-3 py-2 font-mono text-sm text-paper transition-transform focus:translate-y-0"
         >
           Skip to content
         </a>
-        <div id="main-content">{children}</div>
+        <SiteHeader />
+        <div id="main-content" className="flex-1">
+          {children}
+        </div>
+        <SiteFooter />
         <SpeedInsights />
         <Analytics />
       </body>

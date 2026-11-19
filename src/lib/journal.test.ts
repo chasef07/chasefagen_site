@@ -3,7 +3,7 @@ import { describe, expect, test } from 'bun:test'
 import { archives, posts } from '@/content/blog/publication'
 import { countryPages } from '@/content/world-journey'
 import { buildJournalYears, findClosestEntriesByYear } from './journal'
-import { getCountryCode } from './country-flags'
+import { getCountryCode } from './countries'
 
 describe('Journal chronology', () => {
   test('derives every month from posts and sorts newest first', () => {

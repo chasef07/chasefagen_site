@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
 import { cn } from '@/lib/utils'
-import { getCountryCode } from '@/lib/country-flags'
+import { getCountryCode } from '@/lib/countries'
 
 type CountryFlagProps = Omit<ComponentPropsWithoutRef<'span'>, 'children'> & {
   country: string
