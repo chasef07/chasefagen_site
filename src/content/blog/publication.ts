@@ -8,6 +8,7 @@ import type { BlogPost } from '../../types/blog'
 export type PublishedPost = BlogPost & {
   readingTime: number
   url: string
+  entryNumber: number
 }
 
 export type BlogArchive = SourceArchive & {
@@ -140,7 +141,11 @@ export function createBlogPublication(
     postRecords,
     archiveRecords,
   )
-  const posts: PublishedPost[] = postRecords.map((post) => {
+  const newestFirst = [...postRecords].sort(
+    (left, right) =>
+      parseBlogDate(right.date).getTime() - parseBlogDate(left.date).getTime(),
+  )
+  const posts: PublishedPost[] = newestFirst.map((post, index) => {
     const date = parseBlogDate(post.date)
     const month = monthSlug(post.date)
     if (String(date.getUTCFullYear()) !== post.year) {
@@ -151,6 +156,7 @@ export function createBlogPublication(
       ...post,
       readingTime: calculateReadingTime(post.content),
       url: postPath(post.year, month, post.slug),
+      entryNumber: newestFirst.length - index,
     }
   })
   const archives: BlogArchive[] = completeArchiveRecords.map((archive) => ({
@@ -189,6 +195,16 @@ export function createBlogPublication(
     return posts.filter((post) => post.url.startsWith(prefix))
   }
 
+  function getAdjacentPosts(post: PublishedPost) {
+    const index = posts.indexOf(post)
+    return { newer: posts[index - 1], older: posts[index + 1] }
+  }
+
+  function getAdjacentArchives(archive: BlogArchive) {
+    const index = archives.indexOf(archive)
+    return { newer: archives[index - 1], older: archives[index + 1] }
+  }
+
   function archiveStaticParams() {
     return archives.map((archive) => ({
       year: String(archive.year),
@@ -210,6 +226,8 @@ export function createBlogPublication(
     getArchive,
     getPost,
     getPostsForArchive,
+    getAdjacentPosts,
+    getAdjacentArchives,
     archiveStaticParams,
     postStaticParams,
   }
@@ -222,6 +240,8 @@ export const archives = publication.archives
 export const getArchive = publication.getArchive
 export const getPost = publication.getPost
 export const getPostsForArchive = publication.getPostsForArchive
+export const getAdjacentPosts = publication.getAdjacentPosts
+export const getAdjacentArchives = publication.getAdjacentArchives
 export const archiveStaticParams = publication.archiveStaticParams
 export const postStaticParams = publication.postStaticParams
 

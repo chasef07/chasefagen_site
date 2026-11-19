@@ -1,14 +1,7 @@
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { ArrowLeft } from 'lucide-react'
 
-import { PostPresentation } from '@/components/travel-os/PostArticle'
-import { Button } from '@/components/ui/button'
-import {
-  getArchiveForPost,
-  getPost,
-  postStaticParams,
-} from '@/content/blog/publication'
+import { PostArticle } from '@/components/journal/PostArticle'
+import { getPost, postStaticParams } from '@/content/blog/publication'
 import { generatePostMetadata } from '@/lib/seo'
 
 type Props = {
@@ -33,21 +26,5 @@ export default async function PostPage({ params }: Props) {
   const post = getPost(year, month, postSlug)
   if (!post) notFound()
 
-  const archive = getArchiveForPost(post)
-
-  return (
-    <main className="min-h-full">
-      {archive && (
-        <div className="mx-auto max-w-3xl px-6 pt-8 sm:px-10">
-          <Button asChild variant="ghost" size="sm">
-            <Link href={archive.url}>
-              <ArrowLeft data-icon="inline-start" />
-              {archive.displayDate}
-            </Link>
-          </Button>
-        </div>
-      )}
-      <PostPresentation post={post} />
-    </main>
-  )
+  return <PostArticle post={post} />
 }

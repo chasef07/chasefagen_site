@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Clock, MapPin } from 'lucide-react'
 
-import { CountryFlag } from '@/components/travel-os/CountryFlag'
+import { CountryFlag } from '@/components/journal/CountryFlag'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {

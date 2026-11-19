@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { Radio } from 'lucide-react'
 
 import GlobeExperience from '@/components/globe/GlobeExperience'
-import { CountryFlag } from '@/components/travel-os/CountryFlag'
+import { CountryFlag } from '@/components/journal/CountryFlag'
 import { Badge } from '@/components/ui/badge'
 import { countryPages } from '@/content/world-journey'
 
